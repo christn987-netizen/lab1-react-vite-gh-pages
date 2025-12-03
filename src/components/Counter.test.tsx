@@ -1,8 +1,8 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import UserTable from './UserTable'
 import { describe, test, expect, beforeEach, vi } from 'vitest'
 
-global.fetch = vi.fn()
+globalThis.fetch = vi.fn()
 
 const mockUsers = [
   {
@@ -33,7 +33,7 @@ describe('UserTable', () => {
   })
 
   test('loads users and displays them when button is clicked', async () => {
-    (global.fetch as any).mockResolvedValue({
+    (globalThis.fetch as any).mockResolvedValue({
       ok: true,
       json: async () => mockUsers,
     })
@@ -45,13 +45,15 @@ describe('UserTable', () => {
     expect(screen.getByText(/ivan@example.com/i)).toBeInTheDocument()
   })
 
+  // Тест для Варианта 6
   test('filters users by email', async () => {
-    (global.fetch as any).mockResolvedValue({
+    (globalThis.fetch as any).mockResolvedValue({
       ok: true,
       json: async () => mockUsers,
     })
 
     render(<UserTable />)
+
     fireEvent.click(screen.getByText(/загрузить пользователей/i))
     await screen.findByText(/иван иванов/i)
     const input = screen.getByPlaceholderText(/поиск по email/i)
