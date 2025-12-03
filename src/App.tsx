@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import Counter from './components/Counter'
 import './App.css'
+import Counter from './components/Counter'
+import UserTable from './components/UserTable' // <-- Добавлено
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <Counter />
+      <br />
+      <UserTable /> {/* <-- Добавлено */}
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
