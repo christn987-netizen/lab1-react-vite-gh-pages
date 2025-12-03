@@ -52,10 +52,13 @@ describe('UserTable', () => {
     })
 
     render(<UserTable />)
+    
     fireEvent.click(screen.getByText(/загрузить пользователей/i))
     await screen.findByText(/иван иванов/i)
+
     const input = screen.getByPlaceholderText(/поиск по email/i)
     fireEvent.change(input, { target: { value: 'test' } })
+
     expect(screen.queryByText(/иван иванов/i)).not.toBeInTheDocument()
     expect(screen.getByText(/петр петров/i)).toBeInTheDocument()
   })

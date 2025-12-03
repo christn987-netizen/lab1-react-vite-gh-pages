@@ -1,12 +1,23 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { expect, test } from 'vitest';
-import Counter from './Counter';
+import { render, screen, fireEvent } from '@testing-library/react'
+import Counter from './Counter'
+import { describe, test, expect, beforeEach, vi } from 'vitest'
 
-test('Counter increments on click', () => {
-  render(<Counter />);
-  const button = screen.getByRole('button');
-  expect(button).toHaveTextContent('count is 0');
+globalThis.fetch = vi.fn()
 
-  fireEvent.click(button);
-  expect(button).toHaveTextContent('count is 1');
-});
+describe('Counter', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+  })
+
+  test('renders button with initial count', () => {
+    render(<Counter />)
+    expect(screen.getByRole('button')).toHaveTextContent(/count is 0/i)
+  })
+
+  test('increments count when button is clicked', () => {
+    render(<Counter />)
+    const button = screen.getByRole('button')
+    fireEvent.click(button)
+    expect(button).toHaveTextContent(/count is 1/i)
+  })
+})

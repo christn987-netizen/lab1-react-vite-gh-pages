@@ -18,7 +18,7 @@ export default function UserTable() {
     setLoading(true)
     setError(null)
     try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/users')
+      const response = await fetch('[https://jsonplaceholder.typicode.com/users](https://jsonplaceholder.typicode.com/users)')
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
@@ -42,7 +42,6 @@ export default function UserTable() {
         {loading ? 'Загрузка...' : 'Загрузить пользователей'}
       </button>
 
-      {/* Поле поиска (Вариант 6) */}
       <div style={{ marginBottom: '10px' }}>
         <input
           type="text"
@@ -57,7 +56,6 @@ export default function UserTable() {
 
       {users.length > 0 && (
         <>
-           {/* Сообщение, если ничего не найдено (Вариант 6) */}
           {filteredUsers.length === 0 && searchQuery.length >= 3 && (
              <p>Ничего не найдено</p>
           )}
